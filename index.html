@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrepEdge – Intelligent Interview Preparation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link href="index.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Prep<span>Edge</span></div>
+        <div class="nav-links" id="nav-guest">
+            <button class="nav-btn" onclick="showPage('login')">Sign In</button>
+            <button class="nav-btn primary" onclick="showPage('signup')">Get Started</button>
+        </div>
+        <div class="nav-links" id="nav-user" style="display:none">
+            <button class="nav-btn" onclick="showPage('dashboard')">Dashboard</button>
+            <button class="nav-btn" onclick="showPage('history')">History</button>
+            <button class="nav-btn primary" onclick="showPage('roles')">Start Practice</button>
+            <button class="nav-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- LANDING PAGE -->
+    <div id="page-home" class="page active">
+        <div class="hero">
+            <div class="badge">✦ AI-Powered Interview Coach</div>
+            <h1>Ace every interview<br>with <span class="grad">PrepEdge</span></h1>
+            <p>Practice with role-specific questions, get instant AI feedback on clarity and relevance, and track your
+                progress over time.</p>
+            <div class="hero-btns">
+                <button class="btn-primary" onclick="showPage('signup')">Get started free</button>
+                <button class="btn-outline" onclick="showPage('roles')">Try a mock interview</button>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-num">2,400+</div>
+                <div class="stat-label">Questions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">18</div>
+                <div class="stat-label">Job Roles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">AI-Driven</div>
+                <div class="stat-label">Feedback Engine</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">95%</div>
+                <div class="stat-label">User Satisfaction</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-tag">Platform Features</div>
+            <div class="section-title">Everything you need to prepare</div>
+            <div class="section-sub">From timed mock sessions to deep AI analysis — PrepEdge covers every angle.</div>
+            <div class="features-grid">
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(91,110,245,.12)">🎯</div>
+                    <h3>Role-Specific Questions</h3>
+                    <p>Questions dynamically fetched for your target role — Frontend, Backend, Data Science, Product and
+                        more.</p>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(34,211,160,.1)">🤖</div>
+                    <h3>AI-Powered Feedback</h3>
+                    <p>Get instant analysis on answer clarity, keyword relevance, structure, and depth after each
+                        response.</p>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(167,139,250,.1)">⏱</div>
+                    <h3>Timed Sessions</h3>
+                    <p>Simulate real interview pressure with configurable countdown timers per question.</p>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(245,158,11,.1)">📈</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Review your attempt history, score trends, and improvement areas across multiple sessions.</p>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(248,113,113,.1)">🔐</div>
+                    <h3>Secure Auth</h3>
+                    <p>JWT-based authentication with encrypted data storage keeps your practice history private.</p>
+                </div>
+                <div class="feat-card">
+                    <div class="feat-icon" style="background:rgba(91,110,245,.12)">📋</div>
+                    <h3>Session History</h3>
+                    <p>Every session is saved — revisit your old answers, AI notes, and scores anytime.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGN UP -->
+    <div id="page-signup" class="page">
+        <div class="auth-shell">
+            <div class="auth-title">Create account</div>
+            <div class="auth-sub">Start practicing in under 2 minutes</div>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input class="form-input" id="signup-name" type="text" placeholder="Your Name" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-input" id="signup-email" type="email" placeholder="abc@name.com" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-input" id="signup-password" type="password" placeholder="••••••••" />
+            </div>
+            <button class="btn-primary" style="width:100%;margin-top:.5rem" onclick="handleSignup()">Create Account</button>
+            <div class="auth-switch">Already have an account? <a onclick="showPage('login')">Sign in</a></div>
+        </div>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="page-login" class="page">
+        <div class="auth-shell">
+            <div class="auth-title">Welcome back</div>
+            <div class="auth-sub">Sign in to continue your prep</div>
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-input" id="login-email" type="email" placeholder="you@email.com" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-input" id="login-password" type="password" placeholder="••••••••" />
+            </div>
+            <button class="btn-primary" style="width:100%;margin-top:.5rem" onclick="handleLogin()">Sign In</button>
+            <div class="auth-switch">No account yet? <a onclick="showPage('signup')">Sign up free</a></div>
+        </div>
+    </div>
+
+    <!-- ROLE SELECTION -->
+    <div id="page-roles" class="page">
+        <div class="section">
+            <div class="section-tag">Step 1 of 2</div>
+            <div class="section-title">Choose your role</div>
+            <div class="section-sub">Select the job domain you want to practice for.</div>
+            <div class="roles-grid">
+                <div class="role-card" onclick="selectRole(this,'Frontend Dev')"><span class="ri">💻</span><span>Frontend Dev</span></div>
+                <div class="role-card" onclick="selectRole(this,'Backend Dev')"><span class="ri">⚙️</span><span>Backend Dev</span></div>
+                <div class="role-card" onclick="selectRole(this,'Full Stack')"><span class="ri">🔗</span><span>Full Stack</span></div>
+                <div class="role-card" onclick="selectRole(this,'Data Science')"><span class="ri">📊</span><span>Data Science</span></div>
+                <div class="role-card" onclick="selectRole(this,'ML Engineer')"><span class="ri">🧠</span><span>ML Engineer</span></div>
+                <div class="role-card" onclick="selectRole(this,'DevOps')"><span class="ri">🚀</span><span>DevOps</span></div>
+                <div class="role-card" onclick="selectRole(this,'Product Manager')"><span class="ri">🗂</span><span>Product Mgr</span></div>
+                <div class="role-card" onclick="selectRole(this,'UI/UX Design')"><span class="ri">🎨</span><span>UI/UX Design</span></div>
+                <div class="role-card" onclick="selectRole(this,'Cybersecurity')"><span class="ri">🔒</span><span>Cybersecurity</span></div>
+                <div class="role-card" onclick="selectRole(this,'Android Dev')"><span class="ri">📱</span><span>Android Dev</span></div>
+                <div class="role-card" onclick="selectRole(this,'Cloud Arch')"><span class="ri">☁️</span><span>Cloud Arch</span></div>
+                <div class="role-card" onclick="selectRole(this,'QA Engineer')"><span class="ri">🧪</span><span>QA Engineer</span></div>
+            </div>
+            <div style="margin-top:2rem;text-align:right">
+                <button class="btn-outline" style="margin-right:.8rem" onclick="showPage('home')">Back</button>
+                <button class="btn-primary" id="start-btn" disabled style="opacity:.4;cursor:not-allowed"
+                    onclick="startInterview()">Start Interview →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOCK INTERVIEW -->
+    <div id="page-interview" class="page">
+        <div class="section">
+            <div class="section-tag">Mock Interview</div>
+            <div class="section-title" id="interview-role-title">Frontend Dev — Interview Session</div>
+
+            <div class="interview-shell">
+                <div class="interview-header">
+                    <div class="interview-meta">
+                        <span class="tag" id="q-role-tag">Frontend Dev</span>
+                        <span class="tag" id="q-num-tag">Q 1 / 5</span>
+                    </div>
+                    <span class="timer-badge" id="timer-display">02:00</span>
+                </div>
+
+                <div class="q-area">
+                    <div class="q-number" id="q-label">QUESTION 1</div>
+                    <div class="q-text" id="q-text">Loading question...</div>
+                    <textarea class="answer-box" id="answer-input" placeholder="Type your answer here..."></textarea>
+                </div>
+
+                <div class="q-footer">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="q-progress" style="width:20%"></div>
+                    </div>
+                    <div style="display:flex;gap:.6rem">
+                        <button class="btn-outline" onclick="prevQ()" id="prev-btn"
+                            style="padding:.55rem 1.1rem;font-size:.85rem">← Prev</button>
+                        <button class="btn-primary" onclick="nextQ()" id="next-btn"
+                            style="padding:.55rem 1.3rem;font-size:.85rem">Next →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Panel -->
+            <div class="feedback-panel" id="feedback-panel" style="display:none">
+                <div class="fb-header">
+                    <div>
+                        <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.3rem">
+                            AI Feedback</div>
+                        <div style="font-size:.82rem;color:var(--pe-muted)">Instant analysis of your response</div>
+                    </div>
+                    <div class="score-ring">
+                        <svg viewBox="0 0 72 72">
+                            <circle cx="36" cy="36" r="28" fill="none" stroke="#1e2330" stroke-width="6" />
+                            <circle id="fb-ring-arc" cx="36" cy="36" r="28" fill="none" stroke="url(#sg)" stroke-width="6"
+                                stroke-dasharray="176" stroke-dashoffset="44" stroke-linecap="round"
+                                transform="rotate(-90 36 36)" />
+                            <defs>
+                                <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#5b6ef5" />
+                                    <stop offset="100%" stop-color="#22d3a0" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="score-text" id="fb-overall-score">75%</div>
+                    </div>
+                </div>
+                <div class="fb-cats">
+                    <div class="fb-cat">
+                        <div class="fb-cat-label">Clarity</div>
+                        <div class="fb-cat-bar"><div class="fb-cat-fill" id="fb-fill-clarity" style="width:80%;background:#5b6ef5"></div></div>
+                        <div class="fb-cat-val" id="fb-val-clarity" style="color:#5b6ef5">80%</div>
+                    </div>
+                    <div class="fb-cat">
+                        <div class="fb-cat-label">Relevance</div>
+                        <div class="fb-cat-bar"><div class="fb-cat-fill" id="fb-fill-relevance" style="width:72%;background:#22d3a0"></div></div>
+                        <div class="fb-cat-val" id="fb-val-relevance" style="color:#22d3a0">72%</div>
+                    </div>
+                    <div class="fb-cat">
+                        <div class="fb-cat-label">Depth</div>
+                        <div class="fb-cat-bar"><div class="fb-cat-fill" id="fb-fill-depth" style="width:60%;background:#a78bfa"></div></div>
+                        <div class="fb-cat-val" id="fb-val-depth" style="color:#a78bfa">60%</div>
+                    </div>
+                    <div class="fb-cat">
+                        <div class="fb-cat-label">Structure</div>
+                        <div class="fb-cat-bar"><div class="fb-cat-fill" id="fb-fill-structure" style="width:85%;background:#f59e0b"></div></div>
+                        <div class="fb-cat-val" id="fb-val-structure" style="color:#f59e0b">85%</div>
+                    </div>
+                </div>
+                <div class="fb-note" id="fb-note-text">
+                    💡 Good answer! Consider adding concrete examples to strengthen clarity.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="page-dashboard" class="page">
+        <div class="section">
+            <div class="section-tag">Dashboard</div>
+            <div class="section-title">Your progress overview</div>
+            <div class="dash-grid">
+                <div class="dash-card">
+                    <div class="dash-card-label">Sessions Done</div>
+                    <div class="dash-card-val" id="dash-sessions">—</div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-label">Avg Score</div>
+                    <div class="dash-card-val" id="dash-avg">—</div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-label">Questions Answered</div>
+                    <div class="dash-card-val" id="dash-questions">—</div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-label">Top Role</div>
+                    <div class="dash-card-val" id="dash-top-role" style="font-size:1.1rem;margin-top:.3rem">—</div>
+                </div>
+            </div>
+            <div style="margin-top:1.5rem">
+                <div class="section-tag">Recent Activity</div>
+                <div style="margin-top:1rem" class="history-list" id="dash-recent-list">
+                    <div style="color:var(--pe-muted);padding:1rem 0;font-size:.88rem">Loading…</div>
+                </div>
+                <div style="margin-top:1.5rem">
+                    <button class="btn-primary" onclick="showPage('roles')">Start New Session</button>
+                    <button class="btn-outline" style="margin-left:.8rem" onclick="showPage('history')">View All History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HISTORY -->
+    <div id="page-history" class="page">
+        <div class="section">
+            <div class="section-tag">All Attempts</div>
+            <div class="section-title">Interview history</div>
+            <div class="section-sub">Review past sessions and track your improvement over time.</div>
+            <div class="history-list" id="history-list-dynamic">
+                <div style="color:var(--pe-muted);padding:1rem 0;font-size:.88rem">Loading…</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
